@@ -19,8 +19,8 @@ class Transition extends Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize');
-    window.removeEventListener('scroll');
+    window.removeEventListener('resize', () => this.handleBg());
+    window.removeEventListener('scroll', () => this.handleBg());
   }
 
   handleBg() {
@@ -52,8 +52,8 @@ class Transition extends Component {
       && position <= 1;
 
     const vh = window.innerHeight * (shouldConfigureVhPos ? position : 0.5);
-    const beginPos = begin.getBoundingClientRect().bottom;
-    const endPos = end.getBoundingClientRect().bottom;
+    const beginPos = begin ? begin.getBoundingClientRect().bottom : null;
+    const endPos = end ? end.getBoundingClientRect().bottom : null;
 
     // window height and offset position of the elements
     return { vh, beginPos, endPos };
